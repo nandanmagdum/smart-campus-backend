@@ -23,7 +23,7 @@ const otpSchema = new mongoose.Schema<IOTPInterface>({
     createdAt: { type: Date, default: Date.now },
     expiry: { type: Number, expires: 300 }, // expires in 5 minutes
     verificationCount: {type: Number, default: 0}
-});
+}, {timestamps: true});
 
 const otpModel = mongoose.model<IOTPInterface>('otp', otpSchema);
 
@@ -69,13 +69,17 @@ const isOTPexpired = async(otpCreatedAt:Date, expiry:number):Promise<boolean> =>
 
 export const verifyOTPRepo = async(email:string, otp:string):Promise<string> => {
     try {
-        const otpInstance = await otpModel.findOne({email: email});
+        const otpInstance1 = await otpModel.find({email: email});
+        const otpInstance = otpInstance1[otpInstance1.length -1];
         if(!otpInstance){
+            await otpModel.deleteMany({email:email});
             return "Please try again";
         }
         // compre the otp with bcrypt hash
         const status = await comparePasswords(otp, otpInstance.otp);
         if(status === false){
+            await otpModel.deleteOne({_id: otpInstance._id});
+            await otpModel.deleteMany({email:email});
             return  "Wrong OTP";
         }
         // const newHashedOTP = otp;
@@ -86,19 +90,25 @@ export const verifyOTPRepo = async(email:string, otp:string):Promise<string> => 
         // }
         if(otpInstance.verificationCount >= 1){
             await otpModel.deleteOne({_id: otpInstance._id});
+            await otpModel.deleteMany({email:email});
+            return "Please try sending otp again";
         }
         // check if it is expired or not 
         const expiryStatus = await isOTPexpired(otpInstance.createdAt, otpInstance.expiry);
         if(expiryStatus === true){
+            await otpModel.deleteOne({_id: otpInstance._id});
+            await otpModel.deleteMany({email:email});
             return "OTP Expired ! try again !";
         } else {
             const updatedOTPData =  await otpModel.findOneAndUpdate({_id: otpInstance._id}, {verificationCount: otpInstance.verificationCount+1}, {new: true});
             console.log(updatedOTPData?.verificationCount);
             await otpModel.deleteOne({_id: otpInstance._id});
+            await otpModel.deleteMany({email:email});
             return "success";
         }
     } catch (error) {
         console.error(error);
+        await otpModel.deleteMany({email:email});
         return "Server error";
     }
 }
