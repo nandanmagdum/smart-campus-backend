@@ -28,8 +28,9 @@ const otpSchema = new mongoose.Schema<IOTPInterface>({
 const otpModel = mongoose.model<IOTPInterface>('otp', otpSchema);
 
 export async function generateOTP(email:string) {
-    const randomBytes = await crypto.randomBytes(6);
-    const otp = await randomBytes.toString('hex').slice(0, 6);
+    const randomBytes = await crypto.randomBytes(3); // Generate 3 random bytes (which is equivalent to 6 hexadecimal characters)
+    const otp1 = parseInt(randomBytes.toString('hex'), 16) % 1000000; // Convert the bytes to a number and take modulo to ensure it's a 6-digit number
+    const otp = otp1.toString();
     const createdAt = Date.now();
     console.log("+++++++++++++++++++++++ ", otp);
 
