@@ -1,5 +1,5 @@
 import {Router} from "express";
-import { claimeAndClosedIssueController, getAllClosedIssuesController, getAllItemsController,  getFoundItemsRaisedController, getFoundItemsUnRaisedController, getItemController, getLostItemsController, itemIsMineController, lostItemFoundController, newItemFoundController, raiseLostController } from "../controllers/lost_found.controller";
+import { claimeAndClosedIssueController, getAllClosedIssuesController, getAllItemsController,  getFoundItemsRaisedController, getFoundItemsUnRaisedController, getItemController, getLostItemsController, itemIsMineController, lostItemFoundController, newItemFoundController, raiseLostController, uploadItemImageController } from "../controllers/lost_found.controller";
 
 const lostfoundRouter = Router();
 
@@ -20,6 +20,7 @@ lostfoundRouter.get("/found_unraised", getFoundItemsUnRaisedController);
 lostfoundRouter.get("/closed", getAllClosedIssuesController);
 lostfoundRouter.get("/:id", getItemController);
 
+lostfoundRouter.patch("/image_upload", uploadItemImageController);
 
 
 export default lostfoundRouter;

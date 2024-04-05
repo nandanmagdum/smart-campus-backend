@@ -131,3 +131,17 @@ export const addInterestedPersonController = async(req:Request, res:Response) =>
         res.status(500).json({"Error": error});
     }
 }
+
+export const uploadEventPosterController = async(req:Request, res:Response) => {
+    const {_id, url} = req.body;
+    try {
+        const event = await eventModel.findOneAndUpdate({_id: _id}, {$set: {eventPosterUrl: url}}, {new: true});
+        if(!event){
+            res.status(500).json({"Error": "Error uploading Event Poster"});
+        }
+        return res.status(200).json({"Success": event});
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({"Error": error});
+    }
+}

@@ -158,3 +158,17 @@ export const getAllClosedIssuesController = async(req:Request, res:Response) => 
         return res.status(500).json({"Error": error});
     }
 }
+
+export const uploadItemImageController = async(req:Request, res:Response) => {
+    const {_id, url} = req.body;
+    try {
+        const Item = await lostFoundModel.findOneAndUpdate({_id: _id}, {$set: {image: url}}, {new: true});
+        if(!Item) {
+            res.status(500).json({"Error": "Error uploading item image"});
+        }
+        return res.status(200).json({"Success":"Item image uploaded !"});
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({"Error" : error});
+    }
+}

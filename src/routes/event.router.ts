@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { acceptEventController, addInterestedPersonController, markAsDoneController, rejectEventController, requestEventController, updateEventController } from "../controllers/event.controller";
+import { acceptEventController, addInterestedPersonController, markAsDoneController, rejectEventController, requestEventController, updateEventController, uploadEventPosterController } from "../controllers/event.controller";
 import { getAllEventsController, getEventBYDateController, getEventController, getFutureEventsController, getPastEventsContoller, getRequestedEventsController, getUsersEventsContoller } from "../controllers/user.controller";
 
 const eventRouter = Router();
@@ -19,6 +19,8 @@ eventRouter.get("/date", getEventBYDateController);
 eventRouter.get("/:event_id", getEventController);
 
 eventRouter.patch("/", addInterestedPersonController);
+
+eventRouter.patch("/upload_poster", uploadEventPosterController);
 
 
 export default eventRouter;
