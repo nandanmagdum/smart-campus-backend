@@ -181,3 +181,19 @@ export const getEventController = async(req:Request, res:Response) => {
         return res.status(500).json({"Error": error});
     }
 }
+
+export const getRequestedEventsController = async(req:Request, res:Response) => {
+    try {
+        const requestedEvents = await eventModel.find({eventStatus : "requested"});
+        if(!requestedEvents){
+            return res.status(404).json({"Error": "Requested Events not found"});
+        }
+        if(requestedEvents.length === 0){
+            return res.status(202).json({"Requested Events": "There are not requested events"});
+        }
+        return res.status(200).json({"Requested Events": requestedEvents});
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({"Error": error});
+    }
+}

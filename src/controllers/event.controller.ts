@@ -108,3 +108,26 @@ export const markAsDoneController = async(req:Request, res:Response) => {
         res.status(500).json({"Error": error});
     }
 }
+
+export const addInterestedPersonController = async(req:Request, res:Response) => {
+    const {user_id, event_id} = req.body;
+    try {
+        const event = await eventModel.findById(event_id);
+        if(!event){
+           return  res.status(404).json({"Error":"Event not found"});
+        }
+        const userExists =  event.interestedPeople.includes(user_id);
+        if(userExists){
+            return res.status(201).json({"Status":"Interest Already Marked"});
+        }
+
+        const updateOperation = await eventModel.findOneAndUpdate({_id:event_id} , {$push : {interestedPeople: user_id}}, {new: true});
+        if(!updateOperation){
+            return res.status(404).json({"Error":"Error Adding interested person"});
+        }
+        return res.status(200).json({"Event": updateOperation});
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({"Error": error});
+    }
+}
