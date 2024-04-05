@@ -3,11 +3,10 @@ import { IStudentInterface } from "../interfaces/student.interface";
 
 const studentSchema = new Schema<IStudentInterface>({
     student_id: {type: String, required: true, unique: true},
-    year: {type: String, required: true},
-    semester: {type: String, required: true},
+    passout_year: {type: Number, required: true},
+    program: {type: String, required: true},
     department: {type: String, required: true},
-    program: {type: String, required: true}
-});
+}, {timestamps: true});
 
 const studentModel = mongoose.model<IStudentInterface>("studentModel", studentSchema);
 
