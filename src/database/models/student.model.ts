@@ -2,7 +2,7 @@ import mongoose, { Document, Schema } from "mongoose";
 import { IStudentInterface } from "../interfaces/student.interface";
 
 const studentSchema = new Schema<IStudentInterface>({
-    student_id: {type: String, required: true, unique: true},
+    email: {type: String, required: true, unique: true},
     passout_year: {type: Number, required: true},
     program: {type: String, required: true},
     department: {type: String, required: true},

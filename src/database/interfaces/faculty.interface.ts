@@ -1,7 +1,7 @@
 import { Document } from "mongoose";
 
 export interface IFacultyInterface extends Document {
-    faculty_id: string,
+    email: string,
     designation: string,
     department: string
 };

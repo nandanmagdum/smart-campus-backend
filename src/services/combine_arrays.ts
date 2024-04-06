@@ -16,7 +16,7 @@ export const combineArrays = async(allUsers:IUserInterface[], allStudents:IStude
     // combine users and students
     for(const user of allUsers){
         for(const student of allStudents){
-            if(user._id == student.student_id){
+            if(user._id == student.email){
                 const newUser:any = {user};
                 newUser['student_details'] = student;
                 combinedUsers.push(newUser);
@@ -28,7 +28,7 @@ export const combineArrays = async(allUsers:IUserInterface[], allStudents:IStude
     // combine users and faculties
     for(const user of allUsers){
         for(const faculty of allFaculties){
-            if(user._id == faculty.faculty_id){
+            if(user._id == faculty.email){
                 const newUser:any = {user};
                 newUser['faculty_details'] = faculty;
                 combinedUsers.push(newUser);

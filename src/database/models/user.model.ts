@@ -8,6 +8,7 @@ const userSchema = new Schema<IUserInterface>({
     userType: {type: String, required: true, default: 'student'},
     firstName: {type: String, required: true},
     lastName: {type: String, required: true},
+    gender: {type: String, required: true},
     middleName: {type: String},
     phoneNumber : {type: String},
     profilePicture: {type: String},
