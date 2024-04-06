@@ -11,7 +11,7 @@ export const raiseLostController = async(req:Request, res:Response) => {
         if(lostData instanceof Error){
            return res.status(500).json({"Error": lostData.message});
         }
-        return res.status(200).json({"Success": lostData});
+        return res.status(200).json(lostData);
     } catch (error) {
         console.error(error);
         return res.status(500).json({"Error": error});
@@ -26,7 +26,7 @@ export const lostItemFoundController = async(req:Request, res:Response) => {
         if(foundData instanceof Error){
            return res.status(500).json({"Error": foundData.message});
         }
-        return res.status(200).json({"Success": foundData});
+        return res.status(200).json(foundData);
     } catch (error) {
         console.error(error);
         return res.status(500).json({"Error": error});
@@ -40,7 +40,7 @@ export const claimeAndClosedIssueController = async(req:Request, res:Response) =
         if(status instanceof Error){
            return res.status(500).json({"Error": status.message});
         }
-        return res.status(200).json({"Success": status});
+        return res.status(200).json(status);
     } catch (error) {
         console.error(error);
         return res.status(500).json({"Error": error});
@@ -54,7 +54,7 @@ export const newItemFoundController = async(req:Request, res:Response) => {
         if(status instanceof Error){
            return res.status(500).json({"Error": status.message});
         }
-        return res.status(200).json({"Success": status});
+        return res.status(200).json(status);
     } catch (error) {
         console.error(error);
         return res.status(500).json({"Error": error});
@@ -68,7 +68,7 @@ export const itemIsMineController = async(req:Request, res:Response) => {
         if(status instanceof Error){
             return res.status(500).json({"Error": status.message});
         }
-        return res.status(200).json({"Success":status});
+        return res.status(200).json(status);
     } catch (error) {
         console.error(error);
         return res.status(500).json({"Error": error});
@@ -81,7 +81,7 @@ export const getAllItemsController = async(req:Request, res:Response) => {
         if(allItems instanceof Error){
           return  res.status(500).json({"Error": allItems.message});
         }
-        return res.status(200).json({"All Items": allItems});
+        return res.status(200).json(allItems);
         
     } catch (error) {
         console.error(error);
@@ -95,7 +95,7 @@ export const getLostItemsController = async(req:Request, res:Response) => {
         if(allItems instanceof Error){
           return  res.status(500).json({"Error": allItems.message});
         }
-        return res.status(200).json({"Lost Items": allItems});
+        return res.status(200).json(allItems);
         
     } catch (error) {
         console.error(error);
@@ -109,7 +109,7 @@ export const getFoundItemsRaisedController = async(req:Request, res:Response) =>
         if(allItems instanceof Error){
           return  res.status(500).json({"Error": allItems.message});
         }
-        return res.status(200).json({"Found Raised Items": allItems});
+        return res.status(200).json(allItems);
         
     } catch (error) {
         console.error(error);
@@ -123,7 +123,7 @@ export const getFoundItemsUnRaisedController = async(req:Request, res:Response) 
         if(allItems instanceof Error){
           return  res.status(500).json({"Error": allItems.message});
         }
-        return res.status(200).json({"Found UnRaised Items": allItems});
+        return res.status(200).json(allItems);
         
     } catch (error) {
         console.error(error);
@@ -138,7 +138,7 @@ export const getItemController = async(req:Request, res:Response) => {
         if(Item instanceof Error){
           return  res.status(500).json({"Error": Item.message});
         }
-        return res.status(200).json({"Item": Item});
+        return res.status(200).json(Item);
         
     } catch (error) {
         console.error(error);
@@ -152,7 +152,7 @@ export const getAllClosedIssuesController = async(req:Request, res:Response) => 
         if(Item instanceof Error){
           return  res.status(500).json({"Error": Item.message});
         }
-        return res.status(200).json({"Item": Item});
+        return res.status(200).json( Item);
     } catch (error) {
         console.error(error);
         return res.status(500).json({"Error": error});

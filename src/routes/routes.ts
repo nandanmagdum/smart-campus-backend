@@ -15,6 +15,5 @@ router.use("/auth", authRouter);
 router.use("/lost_found", lostfoundRouter);
 router.use("/user", userRouter);
 router.use("/event", eventRouter);
-router.use("/user", imageRouter);
 
 export default router;
