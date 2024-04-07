@@ -20,9 +20,9 @@ export const getComplaintController = async(req:Request, res:Response) => {
     try {
         const allComplaints = await complaintModel.find({_id: id});
         if(!allComplaints) {
-            return res.status(404).json({"Error": "Error fetching all the complaints"});
+            return res.status(404).json({"Error": "complanit not found"});
         }
-        return res.status(200).json({"All Complaints": allComplaints});
+        return res.status(200).json(allComplaints);
     } catch (error) {
         console.error(error);
         return res.status(500).json({"Error": error});

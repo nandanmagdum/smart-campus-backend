@@ -1,7 +1,7 @@
 import { DateSchemaDefinition, Document } from "mongoose";
 
 export interface IComplaintInterface extends Document {
-    user_id: string,
+    email: string,
     raiseTime: Date,
     category: string,
     description: string,

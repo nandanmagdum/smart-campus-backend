@@ -4,6 +4,7 @@ import lostfoundRouter from "./lost_found.router";
 import userRouter from "./user.route";
 import eventRouter from "./event.router";
 import imageRouter from "./image.router";
+import complaintRouter from "./complaint.router";
 
 const router = Router();
 
@@ -15,5 +16,6 @@ router.use("/auth", authRouter);
 router.use("/lost_found", lostfoundRouter);
 router.use("/user", userRouter);
 router.use("/event", eventRouter);
+router.use("/complaint", complaintRouter);
 
 export default router;

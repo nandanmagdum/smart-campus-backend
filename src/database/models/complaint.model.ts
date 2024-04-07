@@ -2,9 +2,9 @@ import mongoose, {Document, Schema} from "mongoose";
 import { IComplaintInterface } from "../interfaces/complaint.interface";
 
 const complaintSchema = new Schema<IComplaintInterface>({
-    user_id : {type: String , required: true},
-    raiseTime : {type: Date , required: true},
-    category: {type: String, required: true},
+    email : {type: String , required: true},
+    raiseTime : {type: Date },
+    category: {type: String},
     description: {type: String, required: true},
     status : {type: String, default : 'pending'},
     committeeMember: {type: String},
